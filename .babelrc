@@ -1,0 +1,5 @@
+{
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+// "@babel/preset-env" handle transform of ES-6 to comon JS
+// "@babel/preset-react" it know how to deal with JSX 
