@@ -28,5 +28,10 @@ module.exports = {
             template: './src/index.html'
         })
     ],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'src/app/components')
+        }
+    },
     mode: process.env.NODE_ENV === "production" ? "production" : "development",
 };
