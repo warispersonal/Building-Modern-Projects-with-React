@@ -9,11 +9,11 @@ const INITIAL_STATE = {
 
 export const todoReducer = (state = INITIAL_STATE, action) =>{
     const {type, payload} = action;
-    const {todo} = state
+    const {todos} = state
     switch (type){
         case ADD_TODO: return {
             ...state,
-            todo: todo.push({'text': payload})
+            todos: todos.concat({'text': payload})
         }
         default:
             return state;

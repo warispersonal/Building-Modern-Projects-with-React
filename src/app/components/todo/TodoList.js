@@ -13,9 +13,8 @@ const TodoList = ({todos}) =>{
 }
 
 const mapStateToProps = (state) =>{
-    console.log(state)
     return{
-        todos: state.todo
+        todos: state.todoReducer.todos
     }
 }
 
