@@ -9,3 +9,10 @@ export const addTodo = (text) =>{
        payload: text
    }
 }
+
+export const removeTodo = (text) => {
+    return{
+        type: REMOVE_TODO,
+        payload: text
+    }
+}
