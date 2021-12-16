@@ -1,10 +1,7 @@
 import {ADD_TODO, REMOVE_TODO} from "../action/todo";
 
 const INITIAL_STATE = {
-    todos: [
-        {text:"ABC", isComplete:false},
-        {text:"DEF", isComplete:true}
-        ]
+    todos: [{text:"ABC", isComplete:false}]
 }
 
 export const todoReducer = (state = INITIAL_STATE, action) =>{
