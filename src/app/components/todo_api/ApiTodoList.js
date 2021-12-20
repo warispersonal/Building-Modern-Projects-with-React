@@ -1,17 +1,34 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {fetchTodoApi, displayAlert} from "@/todo_api/todoApiThunk";
+import {fetchTodoApi} from "@/todo_api/todoApiThunk";
 import SingleTodo from "@/todo_api/SingleTodo";
-function ApiTodoList({loader, error, todos, fetchTodoApiProps}){
+import {getLoader, getError, inCompletedTodo, completedTodo} from "@/todo_api/selector";
+
+function ApiTodoList({loader, error, completedTodos, inCompletedTodos, fetchTodoApiProps}){
     useEffect(()=>{
         fetchTodoApiProps()
     },[])
 
-    const loadTodos = todos.map((item)=>(
+    const completeTodosList = completedTodos.map((item)=>(
         <SingleTodo key={item.id} todo={item} />
     ))
 
-    const showList = error == "" ? loadTodos : error;
+    const inCompleteTodosList = inCompletedTodos.map((item)=>(
+        <SingleTodo key={item.id} todo={item} />
+    ))
+
+    const showList = error == "" ?
+        <div>
+            <div>
+                <h1>Complete todo list</h1>
+                {completeTodosList}
+            </div>
+            <div>
+                <h1>In-complete todo list</h1>
+                {inCompleteTodosList}
+            </div>
+        </div>
+        : error;
 
     return(
         <div>
@@ -21,12 +38,11 @@ function ApiTodoList({loader, error, todos, fetchTodoApiProps}){
 }
 
 const mapStateToProps = (state) =>{
-    const {todoReducer, todoApiReducer} = state
-    const {loader, error, todos} = todoApiReducer
     return{
-        loader,
-        error,
-        todos
+        loader: getLoader(state),
+        error: getError(state),
+        completedTodos: completedTodo(state),
+        inCompletedTodos: inCompletedTodo(state)
     }
 }
 

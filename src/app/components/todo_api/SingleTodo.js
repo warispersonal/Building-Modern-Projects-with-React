@@ -6,7 +6,7 @@ const SingleTodo = (todo) =>{
         <div style={{marginBottom: "25px", border:"2px solid black"}}>
             <p>{title}</p>
             <p>Id: {id}</p>
-            <p>Status: {completed}</p>
+            <p>Status: {completed ? "Complete" : "In-complete"}</p>
             <p>User ID: {userId}</p>
         </div>
     )
