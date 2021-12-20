@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {fetchTodoApi} from "@/todo_api/todoApiThunk";
 import SingleTodo from "@/todo_api/SingleTodo";
 import {getLoader, getError, inCompletedTodo, completedTodo} from "@/todo_api/selector";
+import CreateTodo from "@/todo_api/CreateTodo";
 
 function ApiTodoList({loader, error, completedTodos, inCompletedTodos, fetchTodoApiProps}){
     useEffect(()=>{
@@ -19,13 +20,15 @@ function ApiTodoList({loader, error, completedTodos, inCompletedTodos, fetchTodo
 
     const showList = error == "" ?
         <div>
-            <div>
-                <h1>Complete todo list</h1>
-                {completeTodosList}
-            </div>
+            <CreateTodo />
             <div>
                 <h1>In-complete todo list</h1>
                 {inCompleteTodosList}
+            </div>
+
+            <div>
+                <h1>Complete todo list</h1>
+                {completeTodosList}
             </div>
         </div>
         : error;
