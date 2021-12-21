@@ -1,21 +1,22 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {fetchTodoApi} from "@/todo_api/todoApiThunk";
+import {fetchTodoApi, markAsComplete} from "@/todo_api/todoApiThunk";
 import SingleTodo from "@/todo_api/SingleTodo";
 import {getLoader, getError, inCompletedTodo, completedTodo} from "@/todo_api/selector";
 import CreateTodo from "@/todo_api/CreateTodo";
 
-function ApiTodoList({loader, error, completedTodos, inCompletedTodos, fetchTodoApiProps}){
+function ApiTodoList({loader, error, completedTodos, inCompletedTodos, fetchTodoApiProps, markComplete}){
     useEffect(()=>{
         fetchTodoApiProps()
-    },[])
+    },[inCompletedTodos,completedTodos])
+
 
     const completeTodosList = completedTodos.map((item)=>(
-        <SingleTodo key={item.id} todo={item} />
+        <SingleTodo key={item.id} todo={item} markComplete={markComplete} />
     ))
 
     const inCompleteTodosList = inCompletedTodos.map((item)=>(
-        <SingleTodo key={item.id} todo={item} />
+        <SingleTodo key={item.id} todo={item} markComplete={markComplete} />
     ))
 
     const showList = error == "" ?
@@ -51,7 +52,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        fetchTodoApiProps: () =>dispatch(fetchTodoApi())
+        fetchTodoApiProps: () =>dispatch(fetchTodoApi()),
+        markComplete:(id) => dispatch(markAsComplete(id))
     }
 }
 
