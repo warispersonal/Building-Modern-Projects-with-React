@@ -6,6 +6,7 @@ const CreateTodo = (props) =>{
     return(
         <div>
             <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
+            <button>Add todo</button>
         </div>
     )
 }

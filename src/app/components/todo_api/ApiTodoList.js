@@ -8,7 +8,7 @@ import CreateTodo from "@/todo_api/CreateTodo";
 function ApiTodoList({loader, error, completedTodos, inCompletedTodos, fetchTodoApiProps, markComplete}){
     useEffect(()=>{
         fetchTodoApiProps()
-    },[inCompletedTodos,completedTodos])
+    },[])
 
 
     const completeTodosList = completedTodos.map((item)=>(
